@@ -86,12 +86,6 @@ This project allows you to chat with your starred GitHub repositories to easily 
    poetry run uvicorn server:app --host 0.0.0.0 --port 8000 --reload
    ```
 
-## Data Ingestion Process
-
-The system processes your GitHub repositories through a sophisticated ingestion pipeline:
-
-![Data Ingestion Process](images/ingest.png)
-
 ## Web Frontend Setup
 
 1. Navigate to the web directory:
