@@ -1,7 +1,11 @@
+import { auth } from "@/auth";
 import { Meteors } from "@/components/ui/meteors";
 import ChatWindow from "./components/chat-window";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+  console.log(session);
+  const user = session?.user;
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden ">
       {/* Top left meteors */}
@@ -10,8 +14,8 @@ export default function Home() {
       </div>
 
       {/* Chat window */}
-      <div className="z-10 w-full max-w-4xl">
-        <ChatWindow />
+      <div className="z-10 w-full max-w-8xl">
+        <ChatWindow user={user} />
       </div>
 
       {/* Bottom right meteors */}

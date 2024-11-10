@@ -93,7 +93,6 @@ async def chat(chat_message: ChatMessage):
             "user": user_message,
             "assistant": assistant_message
         })
-        logging.info("Updated chat history")
         
         return {
             "response": assistant_message,

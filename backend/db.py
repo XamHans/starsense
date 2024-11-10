@@ -68,6 +68,7 @@ def search_for_repos(query: str, limit: int = 5):
             cur.execute("""
                 WITH ranked_results AS (
                     SELECT 
+                        r.id,
                         r.name,
                         r.full_name,
                         r.description,
@@ -76,14 +77,14 @@ def search_for_repos(query: str, limit: int = 5):
                         res.distance
                     FROM (
                         SELECT 
-                            repository_id,
+                            id,
                             chunk,
                             embedding <=> ai.openai_embed('text-embedding-3-small', %s) as distance
                         FROM "public"."repositories_embedding_store"
                         ORDER BY distance
                         LIMIT %s
                     ) res
-                    JOIN repositories r ON r.id = res.repository_id
+                    JOIN repositories r ON r.id = res.id
                 )
                 SELECT 
                     CONCAT('name: ', name, ' url: ', url, ' content: ', description) as combined_text,
